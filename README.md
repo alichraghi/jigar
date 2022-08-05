@@ -1,7 +1,8 @@
 # Jigar
+![logo](/media/logo.png)
 
 case convertion library for ziguanas
-supports: lower case, UPPER CASE, MACRO\_CASE, TRAIN-CASE, snake\_case, snake\_Camel, Snake\_Pascal, kebab-case, Kebab-Pascal, camelCase and PascalCase 
+supports: `lower case`, `UPPER CASE`, `MACRO\_CASE`, `TRAIN-CASE`, `snake\_case`, `snake\_Camel`, `Snake\_Pascal`, `kebab-case`, `Kebab-Pascal`, `camelCase` and `PascalCase`
 
 ### Usage
 
