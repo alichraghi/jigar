@@ -2,21 +2,18 @@ const std = @import("std");
 const ascii = std.ascii;
 const testing = std.testing;
 
-// Hel💩LO -> hel💩lo
 pub fn lowerCase(text: []u8) void {
     for (text) |*c| {
         c.* = ascii.toLower(c.*);
     }
 }
 
-// Hel💩LO -> HEL💩LO
 pub fn upperCase(text: []u8) void {
     for (text) |*c| {
         c.* = ascii.toUpper(c.*);
     }
 }
 
-// Hel💩LO bAby -> HEL💩LO_BABY
 pub fn macroCase(text: []u8) void {
     for (text) |*c| {
         if (c.* == ' ') {
@@ -27,7 +24,6 @@ pub fn macroCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> HEL💩LO_BABY
 pub fn trainCase(text: []u8) void {
     for (text) |*c| {
         if (c.* == ' ') {
@@ -38,7 +34,6 @@ pub fn trainCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> hel💩lo_baby
 pub fn snakeCase(text: []u8) void {
     for (text) |*c| {
         if (c.* == ' ') {
@@ -49,33 +44,6 @@ pub fn snakeCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> hel💩lo_Baby
-pub fn snakeCamelCase(text: []u8) void {
-    var first_letter_found = false;
-    var is_word_start = false;
-    for (text) |*c| {
-        if (!first_letter_found and std.ascii.isAlpha(c.*)) {
-            c.* = ascii.toLower(c.*);
-            first_letter_found = true;
-            is_word_start = false;
-            continue;
-        }
-
-        if (c.* == ' ') {
-            c.* = '_';
-            is_word_start = true;
-        } else {
-            if (is_word_start) {
-                c.* = ascii.toUpper(c.*);
-                is_word_start = false;
-            } else {
-                c.* = ascii.toLower(c.*);
-            }
-        }
-    }
-}
-
-// Hel💩LO bAby -> Hel💩lo_Baby
 pub fn snakePascalCase(text: []u8) void {
     var is_word_start = true;
     for (text) |*c| {
@@ -93,7 +61,6 @@ pub fn snakePascalCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> hel💩lo-baby
 pub fn kebabCase(text: []u8) void {
     for (text) |*c| {
         if (c.* == ' ') {
@@ -104,7 +71,6 @@ pub fn kebabCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> Hel💩lo-Baby
 pub fn kebabPascalCase(text: []u8) void {
     var is_word_start = true;
     for (text) |*c| {
@@ -122,9 +88,7 @@ pub fn kebabPascalCase(text: []u8) void {
     }
 }
 
-// Hel💩LO bAby -> hel💩loBaby
-// spaces will be unused so
-// returns the acutal size of text
+/// returns the final size of `text`
 pub fn camelCase(text: []u8) usize {
     var first_letter_found = false;
     var is_word_start = false;
@@ -159,9 +123,7 @@ pub fn camelCase(text: []u8) usize {
     return text.len - spaces_found;
 }
 
-// Hel💩LO bAby -> Hel💩loBaby
-// spaces will be unused so
-// returns the acutal size of text
+/// returns the final size of `text`
 pub fn pascalCase(text: []u8) usize {
     var is_word_start = true;
 
@@ -215,12 +177,6 @@ test "snake case" {
     var test_text = "HelLo Bye ".*;
     snakeCase(&test_text);
     try testing.expectEqualStrings("hello_bye_", &test_text);
-}
-
-test "snake camel case" {
-    var test_text = " HelLo Bye ".*;
-    snakeCamelCase(&test_text);
-    try testing.expectEqualStrings("_hello_Bye_", &test_text);
 }
 
 test "snake pascal case" {
